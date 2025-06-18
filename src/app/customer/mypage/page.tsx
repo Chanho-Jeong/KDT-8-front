@@ -4,10 +4,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/customer/authStore';
 import Navbar from '@/components/customer/Navbar';
-import Wishlist from './sections/Wishlist';
-import OrderStatus from './sections/OrderStatus';
-import Profile from './sections/Profile';
-import Review from './sections/Review';
 
 export default function MyPage() {
     const router = useRouter();
@@ -18,7 +14,7 @@ export default function MyPage() {
 
     useEffect(() => {
         if (mounted && !isAuthenticated()) {
-            router.push('/customer/member/login?redirectTo=/member/mypage');
+            router.push('/customer/member/login?redirectTo=/customer/mypage');
         }
     }, [mounted, isAuthenticated, router]);
 
@@ -27,11 +23,16 @@ export default function MyPage() {
     return (
         <>
             <Navbar />
-            <main className="max-w-6xl mx-auto p-6 grid gap-6 grid-cols-2">
-                <Wishlist />
-                <OrderStatus />
-                <Profile />
-                <Review />
+            <main className="max-w-3xl mx-auto p-6">
+                <h1 className="text-xl font-bold mb-6">마이페이지</h1>
+                <div className="grid grid-cols-2 gap-4">
+                    <button
+                        className="bg-gray-100 p-4 rounded hover:bg-gray-200"
+                        onClick={() => router.push('/customer/mypage/wishlist')}
+                    >
+                        ❤️ 찜 목록
+                    </button>
+                </div>
             </main>
         </>
     );
